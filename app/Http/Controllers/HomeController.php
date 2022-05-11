@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-
+use App\Models\Memo;
 class HomeController extends Controller
 {
     /**
@@ -23,6 +23,36 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $user = Auth::user();
+
+        // メモの取得
+        $memos = Memo::where('user_id', $user['id'])->get();
+     
+        return view('create',compact('user','memos'));
+    }
+
+    public function create()
+    {
+        $user = Auth::user();
+        // メモの取得
+        $memos = Memo::where('user_id', $user['id'])->get();
+
+        return view('create',compact('user','memos'));
+    }
+
+    public function store(Request $request)
+    {
+       $data = $request->all();
+       $memo_id = Memo::insertGetId([
+            'page' => $data['page'],
+            'title' => $data['title'],
+            'content' => $data['content'],
+            'user_id' => $data['user_id'], 
+            
+            'status' => 1
+        ]);
+   
+        // リダイレクト処理
+        return redirect()->route('home');
     }
 }
