@@ -55,4 +55,12 @@ class HomeController extends Controller
         // リダイレクト処理
         return redirect()->route('home');
     }
+
+    public function edit($id)
+    {
+        $user = Auth::user();
+        $memo = Memo::where('status',1)->where('id',$id)->where('user_id',$user['id'])->first();
+        $memos = Memo::where('user_id', $user['id'])->get();
+        return view('edit',compact('memo','user','memos'));
+    }
 }
