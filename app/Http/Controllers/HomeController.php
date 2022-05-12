@@ -59,8 +59,18 @@ class HomeController extends Controller
     public function edit($id)
     {
         $user = Auth::user();
-        $memo = Memo::where('status',1)->where('id',$id)->where('user_id',$user['id'])->first();
+        $memo = Memo::where('id',$id)->where('user_id',$user['id'])->first();
         $memos = Memo::where('user_id', $user['id'])->get();
         return view('edit',compact('memo','user','memos'));
+    }
+
+    public function update(Request $request)
+    {
+        $data = $request->all();
+        $user = Auth::user();
+        Memo::where('id',$data['memo_id'])->update(['title'=>$data['title'],'page'=>$data['page'],'content'=>$data['content']]);
+        
+        // リダイレクト処理
+        return redirect()->route('home');
     }
 }

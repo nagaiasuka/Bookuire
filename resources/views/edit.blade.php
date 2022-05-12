@@ -3,9 +3,9 @@
 @section('content')
 <div class="card-header">メモ更新画面</div>
 <div class="card-body py-2 px-4 ">
-    <form action="/store" method="post">
+    <form action="/update/{{ $memo['id'] }}" method="post">
         @csrf
-        {{-- <input type='hidden' name='user_id' value="{{ $user['id'] }}"> --}}
+        <input type='hidden' name='memo_id' value="{{ $memo['id'] }}">
         {{-- <div class="form-group">
             <label for="book">bookname</label>
             <input name="book" type="text" class="form-control" id="book" placeholder="本のタイトル">
