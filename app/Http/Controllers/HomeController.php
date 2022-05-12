@@ -71,6 +71,6 @@ class HomeController extends Controller
         Memo::where('id',$data['memo_id'])->update(['title'=>$data['title'],'page'=>$data['page'],'content'=>$data['content']]);
         
         // リダイレクト処理
-        return redirect()->route('home');
+        return redirect()->route('edit',['id'=>$data['memo_id']]);
     }
 }
