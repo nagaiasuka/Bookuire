@@ -28,6 +28,11 @@
         </div>
     </nav>
     <main>
+        @if(session('success'))
+            <div class="alert alert-success m-0" role="alert">
+              {{ session('success') }}
+            </div>
+        @endif
         <div class="row p-0 m-0" style="height: 92vh;">
             <div class="col-md-3 p-0 m-0">
                 <div class="card h-100 p-0 m-0">

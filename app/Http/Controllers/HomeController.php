@@ -60,7 +60,7 @@ class HomeController extends Controller
         ]);
 
         // リダイレクト処理
-        return redirect()->route('home');
+        return redirect()->route('home')->with('success','メモの作成が完了しました！');
     }
 
     public function edit($id)
@@ -85,12 +85,12 @@ class HomeController extends Controller
         Memo::where('id',$data['memo_id'])->update(['title'=>$inputs['title'],'page'=>$inputs['page'],'content'=>$inputs['content']]);
         
         // リダイレクト処理
-        return redirect()->route('edit',['id'=>$data['memo_id']]);
+        return redirect()->route('edit',['id'=>$data['memo_id']])->with('success','メモの更新が完了しました！');;
     }
 
     public function delete($id)
     {
         Memo::where('id',$id)->update(['status'=>2]);
-        return redirect()->route('index');
+        return redirect()->route('index')->with('success','メモの削除が完了しました！');;
     }
 }
