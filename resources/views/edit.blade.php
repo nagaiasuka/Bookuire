@@ -1,7 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="card-header">メモ更新画面</div>
+<div class="card-header d-flex justify-content-between">メモ更新画面
+    <form method='POST' action="/delete/{{$memo['id']}}" id='delete-form'>
+        @csrf
+        <input type='hidden' name='memo_id' value="{{ $memo['id'] }}">
+        <button class='p-0 mr-2' style='border:none;'><i id='delete-button' class="fas fa-trash"></i></button>
+    </form>  
+</div>
 <div class="card-body py-2 px-4 ">
     <form action="/update/{{ $memo['id'] }}" method="post">
         @csrf

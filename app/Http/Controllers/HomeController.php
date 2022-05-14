@@ -26,7 +26,7 @@ class HomeController extends Controller
         $user = Auth::user();
 
         // メモの取得
-        $memos = Memo::where('user_id', $user['id'])->get();
+        $memos = Memo::where('user_id', $user['id'])->where('status',1)->get();
      
         return view('create',compact('user','memos'));
     }
@@ -35,7 +35,7 @@ class HomeController extends Controller
     {
         $user = Auth::user();
         // メモの取得
-        $memos = Memo::where('user_id', $user['id'])->get();
+        $memos = Memo::where('user_id', $user['id'])->where('status',1)->get();
 
         return view('create',compact('user','memos'));
     }
@@ -48,7 +48,7 @@ class HomeController extends Controller
             'title' => $data['title'],
             'content' => $data['content'],
             'user_id' => $data['user_id'], 
-            
+
             'status' => 1
         ]);
    
@@ -59,8 +59,8 @@ class HomeController extends Controller
     public function edit($id)
     {
         $user = Auth::user();
-        $memo = Memo::where('id',$id)->where('user_id',$user['id'])->first();
-        $memos = Memo::where('user_id', $user['id'])->get();
+        $memo = Memo::where('id',$id)->where('user_id',$user['id'])->where('status',1)->first();
+        $memos = Memo::where('user_id', $user['id'])->where('status',1)->get();
         return view('edit',compact('memo','user','memos'));
     }
 
@@ -72,5 +72,11 @@ class HomeController extends Controller
         
         // リダイレクト処理
         return redirect()->route('edit',['id'=>$data['memo_id']]);
+    }
+
+    public function delete($id)
+    {
+        Memo::where('id',$id)->update(['status'=>2]);
+        return redirect()->route('index');
     }
 }
