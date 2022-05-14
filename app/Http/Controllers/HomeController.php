@@ -42,7 +42,7 @@ class HomeController extends Controller
 
     public function store(Request $request)
     {
-        // $data = $request->all();
+        $data = $request->all();
 
         $inputs=$request->validate([
             'title' =>'required|max:100',
@@ -54,7 +54,7 @@ class HomeController extends Controller
             'page' => $inputs['page'],
             'title' => $inputs['title'],
             'content' => $inputs['content'],
-            'user_id' => $inputs['user_id'], 
+            'user_id' => $data['user_id'], 
 
             'status' => 1
         ]);
@@ -74,8 +74,15 @@ class HomeController extends Controller
     public function update(Request $request)
     {
         $data = $request->all();
+
+        $inputs=$request->validate([
+            'title' =>'required|max:100',
+            'page' =>'required|numeric',
+            'content' =>'required',
+        ]);
+
         $user = Auth::user();
-        Memo::where('id',$data['memo_id'])->update(['title'=>$data['title'],'page'=>$data['page'],'content'=>$data['content']]);
+        Memo::where('id',$data['memo_id'])->update(['title'=>$inputs['title'],'page'=>$inputs['page'],'content'=>$inputs['content']]);
         
         // リダイレクト処理
         return redirect()->route('edit',['id'=>$data['memo_id']]);

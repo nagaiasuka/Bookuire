@@ -8,6 +8,15 @@
         <button class='p-0 mr-2' style='border:none;'><i id='delete-button' class="fas fa-trash"></i></button>
     </form>  
 </div>
+@if($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
 <div class="card-body py-2 px-4 ">
     <form action="/update/{{ $memo['id'] }}" method="post">
         @csrf
