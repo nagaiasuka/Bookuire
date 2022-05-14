@@ -45,7 +45,7 @@
         <div class="row p-0 m-0" style="height: 92vh;">
             <div class="col-md-3 p-0 m-0">
                 <div class="card h-100 p-0 m-0">
-                    <div class="card-header">本一覧<a class='ml-auto' href='/create'><i class="fas fa-plus-circle"></i></a></div>
+                    <div class="card-header">本一覧<a class='ml-auto' href='/book_create'><i class="fas fa-plus-circle"></i></a></div>
                     <div class="card-body py-2 px-4">
                         <a href="" class="d-block p-0">絶歌</a>
                         <a href="" class="d-block">森の熊さん</a>

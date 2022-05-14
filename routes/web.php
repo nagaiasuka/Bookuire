@@ -29,6 +29,7 @@ Route::group(['middleware'=>'auth'],function () {
     Route::post('/update/{id}', [App\Http\Controllers\HomeController::class, 'update'])->name('update');
     Route::post('/delete/{id}', [App\Http\Controllers\HomeController::class, 'delete'])->name('delete');
 
+    Route::get('/book_create', [App\Http\Controllers\BookController::class, 'create'])->name('book_create');
 });
 
 
