@@ -38,8 +38,8 @@ class HomeController extends Controller
         $user = Auth::user();
         // メモの取得
         $memos = Memo::where('user_id', $user['id'])->where('status',1)->get();
-
-        return view('create',compact('user','memos'));
+        $books = Book::where('user_id', $user['id'])->where('status',1)->get();
+        return view('create',compact('user','memos','books'));
     }
 
     public function store(Request $request)
@@ -84,10 +84,13 @@ class HomeController extends Controller
     public function edit($id)
     {
         $user = Auth::user();
+       
         $memo = Memo::where('id',$id)->where('user_id',$user['id'])->where('status',1)->first();
+        $book = Book::where('id',$memo['book_id'])->where('user_id',$user['id'])->where('status',1)->first();
         $memos = Memo::where('user_id', $user['id'])->where('status',1)->get();
         $books = Book::where('user_id', $user['id'])->where('status',1)->get();
-        return view('edit',compact('memo','user','memos','books'));
+        // dd($book);
+        return view('edit',compact('memo','user','memos','books','book'));
     }
 
     public function update(Request $request)
