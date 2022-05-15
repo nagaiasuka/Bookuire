@@ -48,7 +48,7 @@
                     <div class="card-header">本一覧<a class='ml-auto' href='/book_create'><i class="fas fa-plus-circle"></i></a></div>
                     <div class="card-body py-2 px-4">
                         @foreach($books as $book)
-                            <a href="" class="d-block p-0">{{ $book['title'] }}</a>
+                            <a href="/book_edit/{{ $book['id'] }}" class="d-block p-0">{{ $book['title'] }}</a>
                         @endforeach
                     </div>
                 </div>

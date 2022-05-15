@@ -31,6 +31,7 @@ Route::group(['middleware'=>'auth'],function () {
 
     Route::get('/book_create', [App\Http\Controllers\BookController::class, 'create'])->name('book_create');
     Route::post('/book_store', [App\Http\Controllers\BookController::class, 'store'])->name('book_store');
+    Route::get('/book_edit/{id}', [App\Http\Controllers\BookController::class, 'edit'])->name('book_edit');
 });
 
 

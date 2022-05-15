@@ -36,4 +36,14 @@ class BookController extends Controller
         // リダイレクト処理
         return redirect()->route('home')->with('success','本の登録が完了しました！');
     }
+
+    public function edit($id)
+    {
+        $user = Auth::user();
+        $book = Book::where('id',$id)->where('user_id',$user['id'])->where('status',1)->first();
+        $memos = Memo::where('user_id', $user['id'])->where('status',1)->get();
+        // bookの取得
+        $books =Book::where('user_id', $user['id'])->where('status',1)->get();
+        return view('book_edit',compact('book','user','memos','books'));
+    }
 }
