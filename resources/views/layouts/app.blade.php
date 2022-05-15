@@ -47,11 +47,9 @@
                 <div class="card h-100 p-0 m-0">
                     <div class="card-header">本一覧<a class='ml-auto' href='/book_create'><i class="fas fa-plus-circle"></i></a></div>
                     <div class="card-body py-2 px-4">
-                        <a href="" class="d-block p-0">絶歌</a>
-                        <a href="" class="d-block">森の熊さん</a>
-                        <a href="" class="d-block">赤ずきん</a>
-                        <a href="" class="d-block">phpの教科書</a>
-                        <a href="" class="d-block">走れメロス</a>
+                        @foreach($books as $book)
+                            <a href="" class="d-block p-0">{{ $book['title'] }}</a>
+                        @endforeach
                     </div>
                 </div>
             </div>

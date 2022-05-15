@@ -13,8 +13,10 @@ class BookController extends Controller
         $user = Auth::user();
         // メモの取得
         $memos = Memo::where('user_id', $user['id'])->where('status',1)->get();
+        // bookの取得
+        $books =Book::where('user_id', $user['id'])->where('status',1)->get();
 
-        return view('book_create',compact('user','memos'));
+        return view('book_create',compact('user','memos','books'));
     }
 
     public function store(Request $request)
