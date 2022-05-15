@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Memo;
+use App\Models\Book;
 class HomeController extends Controller
 {
     /**
@@ -27,8 +28,9 @@ class HomeController extends Controller
 
         // メモの取得
         $memos = Memo::where('user_id', $user['id'])->where('status',1)->get();
+        $books = Book::where('user_id', $user['id'])->where('status',1)->get();
      
-        return view('create',compact('user','memos'));
+        return view('create',compact('user','memos','books'));
     }
 
     public function create()
@@ -43,18 +45,34 @@ class HomeController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        $user = Auth::user();
+
 
         $inputs=$request->validate([
-            'title' =>'required|max:100',
+            'book' =>'required',
             'page' =>'required|numeric',
-            'content' =>'required',
+            'title' =>'required|max:100',
+            'content' =>'required',      
         ]);
+
+        $exist_book = Book::where('user_id', $user['id'])->where('title',$data['book'])->first();
+        if(empty($exist_book['id'])){
+            $book_id = Book::insertGetId([
+                'title' => $inputs['book'],
+                'user_id' => $data['user_id'], 
+                'status' => 1
+            ]);
+        }else{
+            $book_id =$exist_book['id'];
+        }
+
 
         $memo_id = Memo::insertGetId([
             'page' => $inputs['page'],
             'title' => $inputs['title'],
             'content' => $inputs['content'],
             'user_id' => $data['user_id'], 
+            'book_id' => $book_id, 
 
             'status' => 1
         ]);
@@ -68,7 +86,8 @@ class HomeController extends Controller
         $user = Auth::user();
         $memo = Memo::where('id',$id)->where('user_id',$user['id'])->where('status',1)->first();
         $memos = Memo::where('user_id', $user['id'])->where('status',1)->get();
-        return view('edit',compact('memo','user','memos'));
+        $books = Book::where('user_id', $user['id'])->where('status',1)->get();
+        return view('edit',compact('memo','user','memos','books'));
     }
 
     public function update(Request $request)

@@ -17,10 +17,10 @@
     <form action="/store" method="post">
         @csrf
         <input type='hidden' name='user_id' value="{{ $user['id'] }}">
-        {{-- <div class="form-group">
-            <label for="book">bookname</label>
+        <div class="form-group">
+            <label for="book">Book Name</label>
             <input name="book" type="text" class="form-control" id="book" placeholder="本のタイトル">
-        </div> --}}
+        </div>
         <div class="form-group">
             <label for="page">ページ</label>
             <input name="page" type="text" class="form-control" id="page" value="{{ old('page') }}" placeholder="本のページ">
