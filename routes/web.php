@@ -30,6 +30,7 @@ Route::group(['middleware'=>'auth'],function () {
     Route::post('/delete/{id}', [App\Http\Controllers\HomeController::class, 'delete'])->name('delete');
 
     Route::get('/book_create', [App\Http\Controllers\BookController::class, 'create'])->name('book_create');
+    Route::post('/book_store', [App\Http\Controllers\BookController::class, 'store'])->name('book_store');
 });
 
 

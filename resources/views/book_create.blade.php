@@ -14,7 +14,7 @@
 @endif
 
 <div class="card-body py-2 px-4 ">
-    <form action="/store" method="post">
+    <form action="/book_store" method="post">
         @csrf
         <input type='hidden' name='user_id' value="{{ $user['id'] }}">
         {{-- <div class="form-group">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Memo;
+use App\Models\Book;
 class HomeController extends Controller
 {
     /**
@@ -27,6 +28,9 @@ class HomeController extends Controller
 
         // メモの取得
         $memos = Memo::where('user_id', $user['id'])->where('status',1)->get();
+
+        // bookの取得
+        $books =Book::where('user_id', $user['id'])->where('status',1)->get();
      
         return view('create',compact('user','memos'));
     }
@@ -37,7 +41,7 @@ class HomeController extends Controller
         // メモの取得
         $memos = Memo::where('user_id', $user['id'])->where('status',1)->get();
 
-        return view('create',compact('user','memos'));
+        return view('create',compact('user','memos','books'));
     }
 
     public function store(Request $request)
