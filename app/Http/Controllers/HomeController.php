@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Memo;
-use App\Models\Book;
 class HomeController extends Controller
 {
     /**
@@ -28,11 +27,8 @@ class HomeController extends Controller
 
         // メモの取得
         $memos = Memo::where('user_id', $user['id'])->where('status',1)->get();
-
-        // bookの取得
-        $books =Book::where('user_id', $user['id'])->where('status',1)->get();
      
-        return view('create',compact('user','memos','books'));
+        return view('create',compact('user','memos'));
     }
 
     public function create()
@@ -40,10 +36,8 @@ class HomeController extends Controller
         $user = Auth::user();
         // メモの取得
         $memos = Memo::where('user_id', $user['id'])->where('status',1)->get();
-        // bookの取得
-        $books =Book::where('user_id', $user['id'])->where('status',1)->get();
 
-        return view('create',compact('user','memos','books'));
+        return view('create',compact('user','memos'));
     }
 
     public function store(Request $request)
@@ -74,9 +68,7 @@ class HomeController extends Controller
         $user = Auth::user();
         $memo = Memo::where('id',$id)->where('user_id',$user['id'])->where('status',1)->first();
         $memos = Memo::where('user_id', $user['id'])->where('status',1)->get();
-        // bookの取得
-        $books =Book::where('user_id', $user['id'])->where('status',1)->get();
-        return view('edit',compact('memo','user','memos','books'));
+        return view('edit',compact('memo','user','memos'));
     }
 
     public function update(Request $request)
