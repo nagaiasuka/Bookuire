@@ -96,7 +96,7 @@ class HomeController extends Controller
     public function update(Request $request)
     {
         $data = $request->all();
-
+        // dd($data);
         $inputs=$request->validate([
             'title' =>'required|max:100',
             'page' =>'required|numeric',
@@ -104,7 +104,7 @@ class HomeController extends Controller
         ]);
 
         $user = Auth::user();
-        Memo::where('id',$data['memo_id'])->update(['title'=>$inputs['title'],'page'=>$inputs['page'],'content'=>$inputs['content']]);
+        Memo::where('id',$data['memo_id'])->update(['title'=>$inputs['title'],'page'=>$inputs['page'],'content'=>$inputs['content'],'book_id'=>$inputs['book_id']]);
         
         // リダイレクト処理
         return redirect()->route('edit',['id'=>$data['memo_id']])->with('success','メモの更新が完了しました！');;

@@ -23,7 +23,12 @@
         <input type='hidden' name='memo_id' value="{{ $memo['id'] }}">      
         <div class="form-group">
             <label for="book">Book Name</label>
-            <input name="book" type="text" class="form-control" id="book" value="{{ $book['title']}}" placeholder="本のタイトル">
+            <select class='form-control' name='tag_id'>
+            @foreach($books as $book)
+                <option value="{{ $book['id'] }}" {{ $book['id'] == $memo['book_id'] ? "selected" : "" }}>{{$book['title']}}</option>
+            @endforeach
+        </select>
+            {{-- <input name="book" type="text" class="form-control" id="book" value="{{ $book['title']}}" placeholder="本のタイトル"> --}}
         </div>
         <div class="form-group">
             <label for="page">ページ</label>
