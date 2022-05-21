@@ -43,7 +43,7 @@
             <textarea name="content" class="form-control" rows="10">{{ $memo['content'] }}</textarea>
         </div>
         <div class="form-group section1 text-end">
-            <button type="submit" class="btn btn-outline-dark btn-lg">更新</button>
+            <button type="submit" class="btn btn-outline-dark btn-lg mt-5">更新</button>
         </div>
     </form>
 </div>

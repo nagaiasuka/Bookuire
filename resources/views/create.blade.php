@@ -34,7 +34,7 @@
             <textarea name="content" class="form-control" rows="10">{{ old('content') }}</textarea>
         </div>
         <div class="form-group section1 text-end">
-            <button type="submit" class="btn btn-outline-dark btn-lg">保存</button>
+            <button type="submit" class="btn btn-outline-dark btn-lg mt-5">保存</button>
         </div>
     </form>
 </div>
