@@ -17,7 +17,7 @@
         }
       </style>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
@@ -56,10 +56,22 @@
         <div class="row p-0 m-0" style="height: 92vh;">
             <div class="col-md-3 p-0 m-0">
                 <div class="card h-100 p-0 m-0">
-                    <div class="card-header">本一覧<a class='ml-auto' href='/create'><i class="fas fa-plus-circle"></i></a></div>
+                    <div class="card-header">本一覧</div>
                     <div class="card-body py-2 px-4">
+                        <a class='d-block' href='/'>全て表示</a>
                         @foreach ($books as $book)
-                            <a href="/?book={{ $book['title'] }}" class="d-block p-0">{{ $book['title'] }}</a>
+                            <div class="d-flex align-items-center">
+                                <div class="pr-1rem" >
+                                    
+                                    <form method='POST' action="/book_delete/{{$book['id']}}" id='delete-form'>
+                                        @csrf
+                                        <input type='hidden' name='memo_id' value="{{ $book['id'] }}">
+                                        <button class='p-0 mr-2' style='border:none;'><i id='delete-button' class="fas fa-trash"></i></button>
+                                    </form> 
+
+                                </div>
+                                <a href="/?book={{ $book['title'] }}" class="d-block p-0">{{ $book['title'] }}</a>
+                            </div>
                         @endforeach
                     </div>
                 </div>

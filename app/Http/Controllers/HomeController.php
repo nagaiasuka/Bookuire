@@ -40,7 +40,9 @@ class HomeController extends Controller
         $user = Auth::user();
         // メモの取得
         $memos = Memo::where('user_id', $user['id'])->where('status',1)->get();
+        // 本の取得
         $books = Book::where('user_id', $user['id'])->where('status',1)->get();
+        
         return view('create',compact('user','memos','books'));
     }
 
@@ -48,7 +50,6 @@ class HomeController extends Controller
     {
         $data = $request->all();
         $user = Auth::user();
-
 
         $inputs=$request->validate([
             'book' =>'required',
@@ -116,5 +117,12 @@ class HomeController extends Controller
     {
         Memo::where('id',$id)->update(['status'=>2]);
         return redirect()->route('index')->with('success','メモの削除が完了しました！');;
+    }
+
+    public function book_delete($id)
+    {
+        
+        Book::where('id',$id)->update(['status'=>2]);
+        return redirect()->route('index')->with('success','本の削除が完了しました！');;
     }
 }

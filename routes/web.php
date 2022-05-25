@@ -28,6 +28,7 @@ Route::group(['middleware'=>'auth'],function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::post('/update/{id}', [App\Http\Controllers\HomeController::class, 'update'])->name('update');
     Route::post('/delete/{id}', [App\Http\Controllers\HomeController::class, 'delete'])->name('delete');
+    Route::post('/book_delete/{id}', [App\Http\Controllers\HomeController::class, 'book_delete'])->name('book_delete');
 
 });
 
