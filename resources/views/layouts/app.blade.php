@@ -63,6 +63,7 @@
                             <div class="d-flex align-items-center">
                                 <div class="pr-1rem" >
                                     
+                                    
                                     <form method='POST' action="/book_delete/{{$book['id']}}" id='delete-form'>
                                         @csrf
                                         <input type='hidden' name='memo_id' value="{{ $book['id'] }}">

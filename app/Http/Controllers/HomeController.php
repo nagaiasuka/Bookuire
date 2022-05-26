@@ -27,9 +27,9 @@ class HomeController extends Controller
         $user = Auth::user();
 
         // メモの取得
-        // $memos = Memo::where('user_id', $user['id'])->where('status',1)->get();
+        $memos = Memo::where('user_id', $user['id'])->where('status',1)->get();
         $memoModel=new Memo();
-        $memos=$memoModel->myMemo(Auth::id());
+        // $memos=$memoModel->myMemo(Auth::id());
         $books = Book::where('user_id', $user['id'])->where('status',1)->get();
      
         return view('create',compact('user','memos','books'));
@@ -121,8 +121,19 @@ class HomeController extends Controller
 
     public function book_delete($id)
     {
-        
+        $user = Auth::user();
+        // dd($id);
+        $memos = Memo::where('book_id',$id)->where('user_id',$user['id'])->where('status',1)->get();
+
+        foreach($memos as $memo){
+            if($memo['status'] === 1){
+                return redirect()->route('index')->with('success','有効なメモがありますので本を削除できません！');;
+            }
+        }
         Book::where('id',$id)->update(['status'=>2]);
-        return redirect()->route('index')->with('success','本の削除が完了しました！');;
+        return redirect()->route('index')->with('success','本を削除しました！');;
+
+
+        
     }
 }
