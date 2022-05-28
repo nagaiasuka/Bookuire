@@ -27,9 +27,9 @@ class HomeController extends Controller
         $user = Auth::user();
 
         // メモの取得
-        $memos = Memo::where('user_id', $user['id'])->where('status',1)->get();
+        // $memos = Memo::where('user_id', $user['id'])->where('status',1)->get();
         $memoModel=new Memo();
-        // $memos=$memoModel->myMemo(Auth::id());
+        $memos=$memoModel->myMemo(Auth::id());
         $books = Book::where('user_id', $user['id'])->where('status',1)->get();
      
         return view('create',compact('user','memos','books'));
