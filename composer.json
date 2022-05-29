@@ -1,5 +1,5 @@
 {
-    "name": "acme/bookuire",
+    "name": "Laravel/bookuire",
     "type": "project",
     "description": "The Laravel Framework.",
     "keywords": ["framework", "laravel"],
