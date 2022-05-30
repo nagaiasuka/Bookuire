@@ -58,7 +58,8 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "document-root": "public",
+            "index-document": "index.php"
         }
     },
     "config": {
