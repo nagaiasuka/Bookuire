@@ -105,9 +105,10 @@ class HomeController extends Controller
             'page' =>'required|numeric',
             'content' =>'required',
         ]);
+        // dd($data);
 
         $user = Auth::user();
-        Memo::where('id',$data['memo_id'])->update(['title'=>$inputs['title'],'page'=>$inputs['page'],'content'=>$inputs['content'],'book_id'=>$inputs['book_id']]);
+        Memo::where('id',$data['memo_id'])->update(['title'=>$inputs['title'],'page'=>$inputs['page'],'content'=>$inputs['content'],'book_id'=>$data['book_id']]);
         
         // リダイレクト処理
         return redirect()->route('edit',['id'=>$data['memo_id']])->with('success','メモの更新が完了しました！');;
